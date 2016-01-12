@@ -33,3 +33,11 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
+
+# Android
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/build
+/captures
