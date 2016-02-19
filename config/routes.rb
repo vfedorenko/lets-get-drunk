@@ -1,11 +1,25 @@
 Rails.application.routes.draw do
-  resources :users_events, except: [:new, :edit]
   mount_devise_token_auth_for 'User', at: 'users' , controllers: {
-    registrations: 'custom/registrations'
+    registrations: 'custom/registrations',
+    sessions: 'custom/sessions'
   }
-  
-  resources :events, except: [:new, :edit] 
-  
+
+  resources :users, only: [:index, :add_device_id] do
+    collection do
+      put :add_device_id
+    end
+  end
+  resources :events, except: [:new, :edit]
+  resources :friends, only: [:index, :friend_request, :friend_accept, :friend_reject] do
+    member do
+      post 'friend_request'
+      put 'friend_accept'
+      delete 'friend_reject'
+    end
+  end
+  resources :images, only: :create
+
+
   # resources :users, except: [:new, :edit]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

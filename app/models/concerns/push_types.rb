@@ -1,0 +1,6 @@
+module PushTypes
+  FRIEND_REQUEST = 1
+  FRIEND_ACCEPTED = 2
+  FRIEND_DECLINED = 3
+  NEW_EVENT = 4
+end

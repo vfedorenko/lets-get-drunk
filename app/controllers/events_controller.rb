@@ -5,9 +5,10 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events_to_me = Event.joins('LEFT OUTER JOIN events_users ON events_users.event_id = events.id').where("events_users.user_id=?", current_user.id)
+    @events_from_me = Event.where(creator: current_user)
 
-    render json: @events.as_json(include: { users: {only: [:id, :name, :email, :image]}})
+    @events = @events_to_me + @events_from_me
   end
 
   # GET /events/1
@@ -20,12 +21,16 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-    @event.creator_id = @current_user.id
+    @event.creator = @current_user
 
     if @event.save
-      render json: @event, status: :created, location: @event
+      @event.users.each do |user|
+        p "event user = #{user.name}"
+        user.send_event_push(PushTypes::NEW_EVENT, current_user.to_push, @event.title)
+      end
     else
       render json: @event.errors, status: :unprocessable_entity
+      return
     end
   end
 
@@ -51,11 +56,11 @@ class EventsController < ApplicationController
 
   private
 
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    def event_params
-      params.permit(:title, :description, :image, user_ids: [])
-    end
+  def event_params
+    params.permit(:title, :description, :image, user_ids: [])
+  end
 end

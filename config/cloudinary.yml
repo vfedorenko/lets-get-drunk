@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: vfedorenko
+  api_key: '638845438758826'
+  api_secret: M-plrWFl3OJAGZkqFK1f5yahVo4
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: vfedorenko
+  api_key: '638845438758826'
+  api_secret: M-plrWFl3OJAGZkqFK1f5yahVo4
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: vfedorenko
+  api_key: '638845438758826'
+  api_secret: M-plrWFl3OJAGZkqFK1f5yahVo4
+  enhance_image_tag: true
+  static_image_support: false

@@ -1,59 +1,23 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
 
-  # GET /users
-  # GET /users.json
   def index
-    @users = User.all
-
-    render json: @users
+    @users = User.where.not(id: current_user)
   end
 
-  # GET /users/1
-  # GET /users/1.json
-  def show
-    render json: @user
-  end
-
-  # POST /users
-  # POST /users.json
-  def create
-    @user = User.new(user_params)
-
-    if @user.save
-      render json: @user, status: :created, location: @user
+  def add_device_id
+    if (current_user.update_attributes(device_id: device_id_params))
+      render status: 200
+      return
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render status: 400
+      return
     end
-  end
-
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
-  def update
-    @user = User.find(params[:id])
-
-    if @user.update(user_params)
-      head :no_content
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /users/1
-  # DELETE /users/1.json
-  def destroy
-    @user.destroy
-
-    head :no_content
   end
 
   private
 
-    def set_user
-      @user = User.find(params[:id])
-    end
-
-    def user_params
-      params.require(:user).permit(:name, :image_url)
-    end
+  def device_id_params
+    params.require(:device_id)
+  end
 end
