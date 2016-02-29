@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20160205095839) do
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "image"
+    t.string   "image_url"
     t.integer  "creator_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20160205095839) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string   "name"
-    t.string   "image"
+    t.string   "image_url"
     t.string   "email"
     t.integer  "status"
     t.string   "device_id"

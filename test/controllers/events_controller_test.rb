@@ -13,7 +13,7 @@ class EventsControllerTest < ActionController::TestCase
 
   test "should create event" do
     assert_difference('Event.count') do
-      post :create, event: { creator_id: @event.creator_id, description: @event.description, image: @event.image, name: @event.name, users_id: @event.users_id }
+      post :create, event: { creator_id: @event.creator_id, description: @event.description, image_url: @event.image_url, title: @event.title}
     end
 
     assert_response 201
@@ -25,7 +25,7 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "should update event" do
-    put :update, id: @event, event: { creator_id: @event.creator_id, description: @event.description, image: @event.image, name: @event.name, users_id: @event.users_id }
+    put :update, id: @event, event: { creator_id: @event.creator_id, description: @event.description, image_url: @event.image_url, title: @event.title }
     assert_response 204
   end
 

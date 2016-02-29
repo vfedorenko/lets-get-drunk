@@ -1,15 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  title: MyString
   description: MyText
-  image: MyString
-  creator_id: 
-  users_id: 
+  image_url: MyString
+  creator_id: 1
 
 two:
-  name: MyString
+  title: MyString
   description: MyText
-  image: MyString
-  creator_id: 
-  users_id: 
+  image_url: MyString
+  creator_id: 2
